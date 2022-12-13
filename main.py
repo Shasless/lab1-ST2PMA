@@ -49,13 +49,18 @@ print("commentl")
 print("\nB)")
 # ~~~~1)
 print("1)")
-diffGNP = [None]
-prev = None
+diffGNP = []
+prev = 0
 for e in logGNP:
-    if prev is not None:
+    if(len(diffGNP)>0):
         diffGNP.append(e - prev)
+    else:
+        diffGNP.append(0)
     prev = e
 
+print(diffGNP)
+plt.plot(diffGNP)
+plt.show()
 series["diffGNP"] = diffGNP
 print("diffGNP is the quarterly log return of GNP")
 
@@ -65,7 +70,7 @@ plt.show()
 
 # ~~~~3)
 print("\n3)")
-print("this series does indeed seem centered.")
+print("")
 
 # ~~~~4)
 print("\n4)")
@@ -73,4 +78,6 @@ plt.plot(acf(series["diffGNP"][1:], 40))
 plt.show()
 plt.plot(pacf(series["diffGNP"][1:], 40))
 plt.show()
-print("???")
+
+# ~~~~5)
+print("\n5)")
