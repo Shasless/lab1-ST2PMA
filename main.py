@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 from pandas import read_csv
 from numpy import arange
+from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.stattools import acf, pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox
 
@@ -75,3 +76,18 @@ plt.show()
 
 # ~~~~5)
 print("\n5)")
+
+ARIMA()
+# ~~~~6)
+print("\n6)")
+
+# C)
+print("\nC)")
+# ~~~~1)
+print("1)")
+
+# ~~~~2)
+print("2)")
+
+# D)
+print("\nD)")
