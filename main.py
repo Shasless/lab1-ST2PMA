@@ -5,6 +5,8 @@ from numpy import arange
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.stattools import acf, pacf
 from statsmodels.stats.diagnostic import acorr_ljungbox
+from scipy.stats import shapiro
+
 
 # A)
 print("\nA)")
@@ -21,6 +23,7 @@ logGNP = series["log(GNP)"]
 years = arange(1954, 1988, 0.25)
 # sample = logGNP[(1954, "Q1"): (1987, "Q3")]
 plt.plot(years, logGNP)
+plt.title("A-2")
 plt.show()
 
 # ~~~~3)
@@ -31,11 +34,14 @@ print("A stationary time series is a series whitch dosnt depend on the time. ")
 # ~~~~4)
 print("\n4)")
 
+plt.title("A-4")
+
 plt.plot(acf(logGNP, 135))
 plt.show()
 
 # ~~~~5)
 print("\n5)")
+plt.title("A-5")
 
 plt.plot(acorr_ljungbox(logGNP,135)) # ????????????????????????????????? je sais pas
 plt.show()
@@ -61,6 +67,8 @@ series["diffGNP"] = diffGNP
 print("diffGNP is the quarterly log return of GNP")
 
 # ~~~~2)
+plt.title("B-2")
+
 plt.plot(years[1:], series["diffGNP"][1:])
 plt.show()
 
@@ -69,8 +77,12 @@ print("\n3)")
 
 # ~~~~4)
 print("\n4)")
+plt.title("B-4_acf")
+
 plt.plot(acf(series["diffGNP"][1:], 40))
 plt.show()
+plt.title("B-4_pacf")
+
 plt.plot(pacf(series["diffGNP"][1:], 40))
 plt.show()
 
@@ -79,10 +91,28 @@ print("\n5)")
 abc= ARIMA(series["diffGNP"][1:],order =(0,0,2)).fit().predict(1)
 print(abc)
 plt.plot(years[1:len(series["diffGNP"])-1],abc)
+plt.title("B-5")
+
 plt.show()
 # ~~~~6)
 print("\n6)")
 
+
+a=acorr_ljungbox(ARIMA(series["diffGNP"][1:],order =(0,0,1)).fit().predict(1))
+aa=acorr_ljungbox(ARIMA(series["diffGNP"][1:],order =(0,0,2)).fit().predict(1))
+aaa=acorr_ljungbox(ARIMA(series["diffGNP"][1:],order =(8,0,2)).fit().predict(1))
+print("Box pierce, ARMA(0,1)",a)
+print("Box pierce, ARMA(0,2)",aa)
+print("Box pierce, ARMA(8,2)",aaa)
+
+
+
+ba=shapiro(ARIMA(series["diffGNP"][1:],order =(0,0,1)).fit().predict(1))
+baa=shapiro(ARIMA(series["diffGNP"][1:],order =(0,0,2)).fit().predict(1))
+baaa=shapiro(ARIMA(series["diffGNP"][1:],order =(8,0,2)).fit().predict(1))
+print("ARMA(0,1)",ba)
+print("ARMA(0,2)",baa)
+print("ARMA(8,2)",baaa)
 # C)
 print("\nC)")
 # ~~~~1)
@@ -93,12 +123,20 @@ res82 = ARIMA(series["diffGNP"][1 : len(series["diffGNP"])-10], order=(8, 0, 2))
 plt.plot(years[1:len(series["diffGNP"])-20],res01)
 plt.plot(years[1:len(series["diffGNP"])-20],res02)
 plt.plot(years[1:len(series["diffGNP"])-20],res82)
+plt.title("C-1_all")
+
+
 plt.show()
+plt.title("C-1_arma(0,1)")
 
 plt.plot(years[1:len(series["diffGNP"])-20],res01)
 plt.show()
+plt.title("C-1_arma(0,2)")
+
 plt.plot(years[1:len(series["diffGNP"])-20],res02)
 plt.show()
+plt.title("C-1_arma(8,2)")
+
 plt.plot(years[1:len(series["diffGNP"])-20],res82)
 plt.show()
 # ~~~~2)
