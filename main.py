@@ -32,7 +32,6 @@ print("\n4)")
 
 plt.plot(acf(logGNP, 40))
 plt.show()
-print("sdwfxgdswfqsrdf")
 
 # ~~~~5)
 print("\n5)")
@@ -40,10 +39,8 @@ print("\n5)")
 plt.plot(acorr_ljungbox(logGNP, 40))
 plt.show()
 
-print("comment")
 # ~~~~6)
 print("\n6)")
-print("commentl")
 
 # B)
 print("\nB)")
@@ -59,8 +56,6 @@ for e in logGNP:
     prev = e
 
 print(diffGNP)
-plt.plot(diffGNP)
-plt.show()
 series["diffGNP"] = diffGNP
 print("diffGNP is the quarterly log return of GNP")
 
@@ -70,7 +65,6 @@ plt.show()
 
 # ~~~~3)
 print("\n3)")
-print("")
 
 # ~~~~4)
 print("\n4)")
