@@ -76,9 +76,10 @@ plt.show()
 
 # ~~~~5)
 print("\n5)")
-
-##plt.plot(ARIMA(series["diffGNP"][1:],order =(0,0,2)).fit())
-##plt.show()
+abc= ARIMA(series["diffGNP"][1:],order =(0,0,2)).fit().predict(1)
+print(abc)
+plt.plot(years[1:len(series["diffGNP"])-1],abc)
+plt.show()
 # ~~~~6)
 print("\n6)")
 
@@ -93,8 +94,24 @@ plt.plot(years[1:len(series["diffGNP"])-20],res01)
 plt.plot(years[1:len(series["diffGNP"])-20],res02)
 plt.plot(years[1:len(series["diffGNP"])-20],res82)
 plt.show()
+
+plt.plot(years[1:len(series["diffGNP"])-20],res01)
+plt.show()
+plt.plot(years[1:len(series["diffGNP"])-20],res02)
+plt.show()
+plt.plot(years[1:len(series["diffGNP"])-20],res82)
+plt.show()
 # ~~~~2)
 print("2)")
 
 # D)
 print("\nD)")
+"""""
+for i in range(5):
+    for y in range(5):
+        res = ARIMA(series["diffGNP"][1: len(series["diffGNP"]) - 10], order=(i, 0, y)).fit().predict(10)
+        plt.plot(years[1:len(series["diffGNP"]) - 20], res)
+
+plt.show()
+"""""
+print("the end")
